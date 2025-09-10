@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		255FC2C72E70706D0040B29C /* NNTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2C62E70706D0040B29C /* NNTimeApp.swift */; };
 		255FC2C92E70706D0040B29C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2C82E70706D0040B29C /* ContentView.swift */; };
-		255FC2CB2E70706D0040B29C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2CA2E70706D0040B29C /* Item.swift */; };
 		255FC2CD2E7070700040B29C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255FC2CC2E7070700040B29C /* Assets.xcassets */; };
 		255FC2D02E7070700040B29C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255FC2CF2E7070700040B29C /* Preview Assets.xcassets */; };
 		255FC2DA2E7070700040B29C /* NNTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2D92E7070700040B29C /* NNTimeTests.swift */; };
 		255FC2E42E7070700040B29C /* NNTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2E32E7070700040B29C /* NNTimeUITests.swift */; };
 		255FC2E62E7070700040B29C /* NNTimeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2E52E7070700040B29C /* NNTimeUITestsLaunchTests.swift */; };
+		25DBA88E2E71CA96005E4A0D /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBA8892E71CA96005E4A0D /* TimerManager.swift */; };
+		25DBA8902E71CA96005E4A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25DBA88B2E71CA96005E4A0D /* Assets.xcassets */; };
+		25DBA8912E71CA96005E4A0D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25DBA88C2E71CA96005E4A0D /* Preview Assets.xcassets */; };
+		25DBA89A2E71CAB8005E4A0D /* NNTimeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBA8942E71CAB8005E4A0D /* NNTimeWidget.swift */; };
+		25DBA89B2E71CAB8005E4A0D /* TimerActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBA8962E71CAB8005E4A0D /* TimerActivityAttributes.swift */; };
+		25DBA89C2E71CAB8005E4A0D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 25DBA8982E71CAB8005E4A0D /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +43,6 @@
 		255FC2C32E70706D0040B29C /* NNTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NNTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		255FC2C62E70706D0040B29C /* NNTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNTimeApp.swift; sourceTree = "<group>"; };
 		255FC2C82E70706D0040B29C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		255FC2CA2E70706D0040B29C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		255FC2CC2E7070700040B29C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		255FC2CF2E7070700040B29C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		255FC2D52E7070700040B29C /* NNTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NNTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +50,12 @@
 		255FC2DF2E7070700040B29C /* NNTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NNTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		255FC2E32E7070700040B29C /* NNTimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNTimeUITests.swift; sourceTree = "<group>"; };
 		255FC2E52E7070700040B29C /* NNTimeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNTimeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		25DBA8892E71CA96005E4A0D /* TimerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		25DBA88B2E71CA96005E4A0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		25DBA88C2E71CA96005E4A0D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		25DBA8942E71CAB8005E4A0D /* NNTimeWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNTimeWidget.swift; sourceTree = "<group>"; };
+		25DBA8962E71CAB8005E4A0D /* TimerActivityAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerActivityAttributes.swift; sourceTree = "<group>"; };
+		25DBA8982E71CAB8005E4A0D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,9 @@
 		255FC2BA2E70706D0040B29C = {
 			isa = PBXGroup;
 			children = (
+				25DBA8952E71CAB8005E4A0D /* NNTimeWidget */,
+				25DBA8982E71CAB8005E4A0D /* README.md */,
+				25DBA8972E71CAB8005E4A0D /* Shared */,
 				255FC2C52E70706D0040B29C /* NNTime */,
 				255FC2D82E7070700040B29C /* NNTimeTests */,
 				255FC2E22E7070700040B29C /* NNTimeUITests */,
@@ -96,9 +109,11 @@
 		255FC2C52E70706D0040B29C /* NNTime */ = {
 			isa = PBXGroup;
 			children = (
+				25DBA88B2E71CA96005E4A0D /* Assets.xcassets */,
+				25DBA88D2E71CA96005E4A0D /* Preview Content */,
+				25DBA8892E71CA96005E4A0D /* TimerManager.swift */,
 				255FC2C62E70706D0040B29C /* NNTimeApp.swift */,
 				255FC2C82E70706D0040B29C /* ContentView.swift */,
-				255FC2CA2E70706D0040B29C /* Item.swift */,
 				255FC2CC2E7070700040B29C /* Assets.xcassets */,
 				255FC2CE2E7070700040B29C /* Preview Content */,
 			);
@@ -128,6 +143,30 @@
 				255FC2E52E7070700040B29C /* NNTimeUITestsLaunchTests.swift */,
 			);
 			path = NNTimeUITests;
+			sourceTree = "<group>";
+		};
+		25DBA88D2E71CA96005E4A0D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				25DBA88C2E71CA96005E4A0D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		25DBA8952E71CAB8005E4A0D /* NNTimeWidget */ = {
+			isa = PBXGroup;
+			children = (
+				25DBA8942E71CAB8005E4A0D /* NNTimeWidget.swift */,
+			);
+			path = NNTimeWidget;
+			sourceTree = "<group>";
+		};
+		25DBA8972E71CAB8005E4A0D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				25DBA8962E71CAB8005E4A0D /* TimerActivityAttributes.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +275,9 @@
 			files = (
 				255FC2D02E7070700040B29C /* Preview Assets.xcassets in Resources */,
 				255FC2CD2E7070700040B29C /* Assets.xcassets in Resources */,
+				25DBA89C2E71CAB8005E4A0D /* README.md in Resources */,
+				25DBA8912E71CA96005E4A0D /* Preview Assets.xcassets in Resources */,
+				25DBA8902E71CA96005E4A0D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +303,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				255FC2C92E70706D0040B29C /* ContentView.swift in Sources */,
-				255FC2CB2E70706D0040B29C /* Item.swift in Sources */,
+				25DBA89B2E71CAB8005E4A0D /* TimerActivityAttributes.swift in Sources */,
+				25DBA88E2E71CA96005E4A0D /* TimerManager.swift in Sources */,
+				25DBA89A2E71CAB8005E4A0D /* NNTimeWidget.swift in Sources */,
 				255FC2C72E70706D0040B29C /* NNTimeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
