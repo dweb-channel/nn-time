@@ -11,26 +11,26 @@ import Combine
 import SwiftUI
 
 @MainActor
-class StopwatchManager: ObservableObject {
+class ClockManager: ObservableObject {
     // MARK: - Published Properties
     @Published var isRunning = false
-    @Published var elapsedTime: TimeInterval = 0
-    @Published var formattedTime = "00:00:00"
+    @Published var currentTime = "00:00:00"
     
     // MARK: - Private Properties
     private var timer: Timer?
-    private var startTime: Date?
-    private var pausedDuration: TimeInterval = 0
     private var activity: Activity<TimerActivityAttributes>?
     
-    // MARK: - Stopwatch Control Methods
+    init() {
+        updateCurrentTime()
+    }
     
-    /// 启动秒表
+    // MARK: - Clock Control Methods
+    
+    /// 启动时钟显示
     func start() {
         guard !isRunning else { return }
         
         isRunning = true
-        startTime = Date()
         
         // 启动内部计时器用于更新UI
         startInternalTimer()
@@ -39,45 +39,9 @@ class StopwatchManager: ObservableObject {
         startLiveActivity()
     }
     
-    /// 暂停秒表
-    func pause() {
-        guard isRunning else { return }
-        
+    /// 停止时钟显示
+    func stop() {
         isRunning = false
-        
-        // 计算并保存暂停时的累计时间
-        if let startTime = startTime {
-            pausedDuration += Date().timeIntervalSince(startTime)
-        }
-        
-        // 停止内部计时器
-        stopInternalTimer()
-        
-        // 更新 Live Activity
-        updateLiveActivity()
-    }
-    
-    /// 继续秒表
-    func resume() {
-        guard !isRunning else { return }
-        
-        isRunning = true
-        startTime = Date() // 重新设置开始时间
-        
-        // 重启内部计时器
-        startInternalTimer()
-        
-        // 更新 Live Activity
-        updateLiveActivity()
-    }
-    
-    /// 重置秒表
-    func reset() {
-        isRunning = false
-        elapsedTime = 0
-        pausedDuration = 0
-        startTime = nil
-        formattedTime = "00:00:00"
         
         // 停止内部计时器
         stopInternalTimer()
@@ -91,7 +55,7 @@ class StopwatchManager: ObservableObject {
     private func startInternalTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in
-                await self?.updateElapsedTime()
+                await self?.updateCurrentTime()
             }
         }
     }
@@ -101,24 +65,20 @@ class StopwatchManager: ObservableObject {
         timer = nil
     }
     
-    private func updateElapsedTime() async {
-        guard let startTime = startTime else { return }
-        
-        if isRunning {
-            elapsedTime = Date().timeIntervalSince(startTime) + pausedDuration
-        } else {
-            elapsedTime = pausedDuration
-        }
-        
-        updateFormattedTime()
+    private func updateCurrentTime() async {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateFormat = "HH:mm:ss"
+        currentTime = formatter.string(from: now)
     }
     
-    private func updateFormattedTime() {
-        let hours = Int(elapsedTime) / 3600
-        let minutes = Int(elapsedTime) % 3600 / 60
-        let seconds = Int(elapsedTime) % 60
-        
-        formattedTime = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    private func updateCurrentTime() {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        formatter.dateFormat = "HH:mm:ss"
+        currentTime = formatter.string(from: now)
     }
     
     // MARK: - Live Activity Methods
@@ -129,11 +89,11 @@ class StopwatchManager: ObservableObject {
             return
         }
         
-        let attributes = TimerActivityAttributes(timerName: "秒表")
+        let attributes = TimerActivityAttributes(timerName: "时钟")
         let contentState = TimerActivityAttributes.ContentState(
-            startTime: startTime ?? Date(),
+            startTime: Date(),
             isRunning: isRunning,
-            pausedDuration: pausedDuration
+            pausedDuration: 0
         )
         
         do {
@@ -152,9 +112,9 @@ class StopwatchManager: ObservableObject {
         guard let activity = activity else { return }
         
         let contentState = TimerActivityAttributes.ContentState(
-            startTime: startTime ?? Date(),
+            startTime: Date(),
             isRunning: isRunning,
-            pausedDuration: pausedDuration
+            pausedDuration: 0
         )
         
         Task {
@@ -166,9 +126,9 @@ class StopwatchManager: ObservableObject {
         guard let activity = activity else { return }
         
         let contentState = TimerActivityAttributes.ContentState(
-            startTime: startTime ?? Date(),
+            startTime: Date(),
             isRunning: false,
-            pausedDuration: pausedDuration
+            pausedDuration: 0
         )
         
         Task {
@@ -184,11 +144,7 @@ class StopwatchManager: ObservableObject {
         return !isRunning
     }
     
-    var canPause: Bool {
+    var canStop: Bool {
         return isRunning
-    }
-    
-    var canReset: Bool {
-        return elapsedTime > 0 || isRunning
     }
 }

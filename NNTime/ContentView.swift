@@ -9,14 +9,14 @@ import SwiftUI
 import ActivityKit
 
 struct ContentView: View {
-    @StateObject private var timerManager = TimerManager()
+    @StateObject private var clockManager = ClockManager()
     
     var body: some View {
         NavigationView {
             VStack(spacing: 40) {
                 // 应用标题
                 VStack(spacing: 8) {
-                    Image(systemName: "timer")
+                    Image(systemName: "clock")
                         .font(.system(size: 60))
                         .foregroundColor(.blue)
                     
@@ -24,7 +24,7 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                    Text("精准计时器")
+                    Text("实时时钟")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -34,7 +34,7 @@ struct ContentView: View {
                 
                 // 时间显示区域
                 VStack(spacing: 16) {
-                    Text(timerManager.formattedTime)
+                    Text(clockManager.currentTime)
                         .font(.system(size: 72, weight: .light, design: .monospaced))
                         .foregroundColor(.primary)
                         .padding(.horizontal)
@@ -42,10 +42,10 @@ struct ContentView: View {
                     // 状态指示器
                     HStack(spacing: 8) {
                         Circle()
-                            .fill(timerManager.isTimerRunning ? Color.green : Color.gray)
+                            .fill(clockManager.isRunning ? Color.green : Color.gray)
                             .frame(width: 12, height: 12)
                         
-                        Text(timerManager.isTimerRunning ? "运行中" : "已停止")
+                        Text(clockManager.isRunning ? "Live Activity 运行中" : "已停止")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -64,51 +64,28 @@ struct ContentView: View {
                 VStack(spacing: 20) {
                     // 主要控制按钮
                     HStack(spacing: 30) {
-                        // 开始/暂停按钮
+                        // 开始/停止按钮
                         Button(action: {
-                            if timerManager.isTimerRunning {
-                                timerManager.pauseTimer()
-                            } else if timerManager.elapsedTime > 0 {
-                                timerManager.resumeTimer()
+                            if clockManager.isRunning {
+                                clockManager.stop()
                             } else {
-                                timerManager.startTimer()
+                                clockManager.start()
                             }
                         }) {
                             HStack(spacing: 8) {
-                                Image(systemName: timerManager.isTimerRunning ? "pause.fill" : "play.fill")
+                                Image(systemName: clockManager.isRunning ? "stop.fill" : "play.fill")
                                     .font(.title2)
-                                Text(timerManager.isTimerRunning ? "暂停" : (timerManager.elapsedTime > 0 ? "继续" : "开始"))
+                                Text(clockManager.isRunning ? "停止显示" : "开始显示")
                                     .font(.headline)
                                     .fontWeight(.semibold)
                             }
                             .foregroundColor(.white)
-                            .frame(width: 120, height: 60)
+                            .frame(width: 140, height: 60)
                             .background(
                                 RoundedRectangle(cornerRadius: 30)
-                                    .fill(timerManager.isTimerRunning ? Color.orange : Color.blue)
+                                    .fill(clockManager.isRunning ? Color.red : Color.blue)
                             )
                         }
-                        .disabled(false)
-                        
-                        // 重置按钮
-                        Button(action: {
-                            timerManager.resetTimer()
-                        }) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "arrow.clockwise")
-                                    .font(.title2)
-                                Text("重置")
-                                    .font(.headline)
-                                    .fontWeight(.semibold)
-                            }
-                            .foregroundColor(.white)
-                            .frame(width: 120, height: 60)
-                            .background(
-                                RoundedRectangle(cornerRadius: 30)
-                                    .fill(timerManager.canReset ? Color.red : Color.gray)
-                            )
-                        }
-                        .disabled(!timerManager.canReset)
                     }
                     
                     // Live Activity 状态提示

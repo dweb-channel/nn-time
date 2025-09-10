@@ -21,7 +21,7 @@ struct NNTimeWidgetLiveActivity: Widget {
                 // 展开状态
                 DynamicIslandExpandedRegion(.leading) {
                     HStack {
-                        Image(systemName: "timer")
+                        Image(systemName: "stopwatch")
                             .foregroundColor(.blue)
                         Text(context.attributes.timerName)
                             .font(.caption)
@@ -40,7 +40,7 @@ struct NNTimeWidgetLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.bottom) {
                     HStack {
                         Spacer()
-                        Text("计时器运行中")
+                        Text("时钟运行中")
                             .font(.caption2)
                             .foregroundColor(.secondary)
                         Spacer()
@@ -48,7 +48,7 @@ struct NNTimeWidgetLiveActivity: Widget {
                 }
             } compactLeading: {
                 // 紧凑状态左侧
-                Image(systemName: "timer")
+                Image(systemName: "clock")
                     .foregroundColor(.blue)
             } compactTrailing: {
                 // 紧凑状态右侧 - 显示时间
@@ -58,7 +58,7 @@ struct NNTimeWidgetLiveActivity: Widget {
                     .fontWeight(.medium)
             } minimal: {
                 // 最小状态
-                Image(systemName: "timer")
+                Image(systemName: "clock")
                     .foregroundColor(.blue)
             }
         }
@@ -72,7 +72,7 @@ struct LockScreenLiveActivityView: View {
     var body: some View {
         VStack(spacing: 8) {
             HStack {
-                Image(systemName: "timer")
+                Image(systemName: "clock")
                     .foregroundColor(.blue)
                 Text(context.attributes.timerName)
                     .font(.headline)
@@ -89,11 +89,11 @@ struct LockScreenLiveActivityView: View {
             }
             
             HStack {
-                Text(context.state.isRunning ? "运行中" : "已暂停")
+                Text(context.state.isRunning ? "显示中" : "已停止")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
-                Text("开始时间: \(context.state.startTime, formatter: timeFormatter)")
+                Text("当前时间")
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }
@@ -104,32 +104,20 @@ struct LockScreenLiveActivityView: View {
     }
 }
 
-// MARK: - 计时器显示视图
+// MARK: - 时钟显示视图
 struct TimerDisplayView: View {
     let context: ActivityViewContext<TimerActivityAttributes>
     
     var body: some View {
-        Text(formattedElapsedTime)
+        Text(currentTimeString)
             .monospacedDigit()
     }
     
-    private var formattedElapsedTime: String {
-        let currentTime = Date()
-        let elapsed: TimeInterval
-        
-        if context.state.isRunning {
-            // 如果正在运行，计算从开始时间到现在的时间，加上之前暂停的累计时间
-            elapsed = currentTime.timeIntervalSince(context.state.startTime) + context.state.pausedDuration
-        } else {
-            // 如果暂停，只显示暂停时的累计时间
-            elapsed = context.state.pausedDuration
-        }
-        
-        let hours = Int(elapsed) / 3600
-        let minutes = Int(elapsed) % 3600 / 60
-        let seconds = Int(elapsed) % 60
-        
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    private var currentTimeString: String {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter.string(from: now)
     }
 }
 
