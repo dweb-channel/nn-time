@@ -2,23 +2,25 @@
 //  NNTimeWidget.swift
 //  NNTimeWidget
 //
-//  Created by waterbang on 2025/9/10.
+//  Created by waterbang on 2025/9/13.
 //
 
 import WidgetKit
 import SwiftUI
 import ActivityKit
 
-// MARK: - Live Activity Widget
+// MARK: - Live Activity Widget（灵动岛和锁屏显示）
+/// 这是专门用于 Live Activity 的 Widget，支持灵动岛和锁屏显示
 struct NNTimeWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
+        // ActivityConfiguration 专门用于配置 Live Activity
         ActivityConfiguration(for: TimerActivityAttributes.self) { context in
-            // 锁屏界面显示
+            // 锁屏界面显示的内容
             LockScreenLiveActivityView(context: context)
         } dynamicIsland: { context in
-            // 灵动岛显示
+            // 灵动岛显示的内容
             DynamicIsland {
-                // 展开状态
+                // 展开状态的各个区域
                 DynamicIslandExpandedRegion(.leading) {
                     HStack {
                         Image(systemName: "stopwatch")
@@ -40,24 +42,23 @@ struct NNTimeWidgetLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.bottom) {
                     HStack {
                         Spacer()
-                        Text("时钟运行中")
+                        Text(context.state.isRunning ? "计时器运行中" : "计时器已暂停")
                             .font(.caption2)
                             .foregroundColor(.secondary)
                         Spacer()
                     }
                 }
             } compactLeading: {
-                // 紧凑状态左侧
+                // 紧凑状态左侧显示的图标
                 Image(systemName: "clock")
                     .foregroundColor(.blue)
             } compactTrailing: {
-                // 紧凑状态右侧 - 显示时间
-                // 紧凑状态右侧 - 显示时间
+                // 紧凑状态右侧显示的时间
                 TimerDisplayView(context: context)
                     .font(.caption)
                     .fontWeight(.medium)
             } minimal: {
-                // 最小状态
+                // 最小状态显示的图标
                 Image(systemName: "clock")
                     .foregroundColor(.blue)
             }
@@ -66,6 +67,7 @@ struct NNTimeWidgetLiveActivity: Widget {
 }
 
 // MARK: - 锁屏界面视图
+/// 在锁屏界面显示的 Live Activity 内容
 struct LockScreenLiveActivityView: View {
     let context: ActivityViewContext<TimerActivityAttributes>
     
@@ -89,11 +91,11 @@ struct LockScreenLiveActivityView: View {
             }
             
             HStack {
-                Text(context.state.isRunning ? "显示中" : "已停止")
+                Text(context.state.isRunning ? "计时中" : "已暂停")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 Spacer()
-                Text("当前时间")
+                Text("计时器")
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }
@@ -104,33 +106,40 @@ struct LockScreenLiveActivityView: View {
     }
 }
 
-// MARK: - 时钟显示视图
+// MARK: - 时间显示视图
+/// 显示计时器时间的视图，会根据 Activity 状态计算正确的时间
 struct TimerDisplayView: View {
     let context: ActivityViewContext<TimerActivityAttributes>
     
     var body: some View {
-        Text(currentTimeString)
-            .monospacedDigit()
+        Text(elapsedTimeString)
+            .monospacedDigit()  // 使用等宽数字字体，让时间显示更稳定
     }
     
-    private var currentTimeString: String {
+    /// 计算并格式化经过的时间
+    private var elapsedTimeString: String {
+        let state = context.state
+        
+        if !state.isRunning {
+            // 如果计时器已停止，显示暂停时的累计时间
+            return formatTimeInterval(state.pausedDuration)
+        }
+        
+        // 计算从开始时间到现在的经过时间
         let now = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
-        return formatter.string(from: now)
+        let elapsed = now.timeIntervalSince(state.startTime) + state.pausedDuration
+        return formatTimeInterval(elapsed)
+    }
+    
+    /// 将时间间隔格式化为 HH:mm:ss 格式
+    /// - Parameter interval: 时间间隔（秒）
+    /// - Returns: 格式化后的时间字符串
+    private func formatTimeInterval(_ interval: TimeInterval) -> String {
+        let totalSeconds = Int(interval)
+        let hours = totalSeconds / 3600        // 小时数
+        let minutes = (totalSeconds % 3600) / 60  // 分钟数
+        let seconds = totalSeconds % 60        // 秒数
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
 
-// MARK: - 时间格式化器
-private let timeFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.timeStyle = .short
-    return formatter
-}()
-
-// MARK: - Widget Bundle
-struct NNTimeWidgetBundle: WidgetBundle {
-    var body: some Widget {
-        NNTimeWidgetLiveActivity()
-    }
-}

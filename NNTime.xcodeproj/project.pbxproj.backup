@@ -81,18 +81,8 @@
 		25DBA8982E71CAB8005E4A0D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		257012352E75AC4F00F8D9B7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TimerActivityAttributes.swift,
-			);
-			target = 255FC2C22E70706D0040B29C /* NNTime */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		257011712E759F1500F8D9B7 /* NNTimeWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (257012352E75AC4F00F8D9B7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NNTimeWidget; sourceTree = "<group>"; };
+		257011712E759F1500F8D9B7 /* NNTimeWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = NNTimeWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,9 +154,8 @@
 				255FC2CC2E7070700040B29C /* Assets.xcassets */,
 				255FC2CE2E7070700040B29C /* Preview Content */,
 			);
-			name = NNTime;
-			path = "/Users/waterbang/Desktop/waterbang/swift/nn-time/NNTime";
-			sourceTree = "<absolute>";
+			path = NNTime;
+			sourceTree = "<group>";
 		};
 		255FC2CE2E7070700040B29C /* Preview Content */ = {
 			isa = PBXGroup;
@@ -274,6 +263,7 @@
 			buildPhases = (
 				257011672E759F1400F8D9B7 /* Sources */,
 				257011682E759F1400F8D9B7 /* Frameworks */,
+				257011692E759F1400F8D9B7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -357,6 +347,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		255FC2DD2E7070700040B29C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		257011692E759F1400F8D9B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

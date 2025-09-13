@@ -31,3 +31,9 @@
 - `NSSupportsLiveActivities`: Widget 支持 Live Activity
 - `NSExtensionPointIdentifier`: WidgetKit 扩展标识符
 # nn-time
+
+## build
+
+```bash
+xcodebuild -project NNTime.xcodeproj -scheme NNTime -destination 'platform=iOS Simulator,name=iPhone 16 Pro' build
+```

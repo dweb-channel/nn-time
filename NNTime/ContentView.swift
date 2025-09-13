@@ -63,7 +63,7 @@ struct ContentView: View {
                 // 控制按钮区域
                 VStack(spacing: 20) {
                     // 主要控制按钮
-                    HStack(spacing: 30) {
+                    HStack(spacing: 20) {
                         // 开始/停止按钮
                         Button(action: {
                             if clockManager.isRunning {
@@ -75,17 +75,38 @@ struct ContentView: View {
                             HStack(spacing: 8) {
                                 Image(systemName: clockManager.isRunning ? "stop.fill" : "play.fill")
                                     .font(.title2)
-                                Text(clockManager.isRunning ? "停止显示" : "开始显示")
+                                Text(clockManager.isRunning ? "停止" : "开始")
                                     .font(.headline)
                                     .fontWeight(.semibold)
                             }
                             .foregroundColor(.white)
-                            .frame(width: 140, height: 60)
+                            .frame(width: 120, height: 60)
                             .background(
                                 RoundedRectangle(cornerRadius: 30)
                                     .fill(clockManager.isRunning ? Color.red : Color.blue)
                             )
                         }
+                        
+                        // 重置按钮
+                        Button(action: {
+                            clockManager.reset()
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "arrow.clockwise")
+                                    .font(.title2)
+                                Text("重置")
+                                    .font(.headline)
+                                    .fontWeight(.semibold)
+                            }
+                            .foregroundColor(.white)
+                            .frame(width: 120, height: 60)
+                            .background(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .fill(Color.gray)
+                            )
+                        }
+                        .disabled(clockManager.isRunning)
+                        .opacity(clockManager.isRunning ? 0.6 : 1.0)
                     }
                     
                     // Live Activity 状态提示

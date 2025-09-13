@@ -9,6 +9,36 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>NNTimeWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>255FC2C22E70706D0040B29C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>255FC2D42E7070700040B29C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>255FC2DE2E7070700040B29C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2570116A2E759F1400F8D9B7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>
